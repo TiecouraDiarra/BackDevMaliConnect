@@ -22,7 +22,7 @@ public class TypeProjetController {
     }
 
     //AFFICHER LES TYPES
-//    @PreAuthorize("hasRole('ADMIN')")
+  // @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficher")
     public List<TypeProjet> Afficher(){
         return typeProjetService.Afficher();
