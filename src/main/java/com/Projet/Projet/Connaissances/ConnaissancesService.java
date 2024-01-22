@@ -20,7 +20,6 @@ public interface ConnaissancesService {
 
     MessageResponse modifierConnaissances(
             Long id,
-            String nom,
-            String  type);
+            String nom);
 }
 

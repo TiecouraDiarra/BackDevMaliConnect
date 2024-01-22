@@ -31,8 +31,6 @@ public class ConnaissancesImple implements ConnaissancesService {
         return connaissancesRepository.findById(connaissances.getId())
                 .map(p->{
                     p.setNom(connaissances.getNom());
-                    p.setType(connaissances.getType());
-
                     return connaissancesRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("connaissence non trouvé !"));
     }
@@ -63,11 +61,10 @@ public class ConnaissancesImple implements ConnaissancesService {
     }
 
     @Override
-    public MessageResponse modifierConnaissances(Long id, String nom, String type) {
+    public MessageResponse modifierConnaissances(Long id, String nom) {
         Connaissances connaissances = new Connaissances();
         connaissances.setId(id);
         connaissances.setNom(nom);
-        connaissances.setType(type);
 
         Modifier(connaissances);
 

@@ -21,7 +21,6 @@ public class Connaissances {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    private String  type;
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
     private User user;
