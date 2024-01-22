@@ -36,7 +36,6 @@ public class TypeProjetController {
         return new MessageResponse("Type Modifie avec succes", true);
     }
 
-
     //SUPPRIMER UN TYPE
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id_TypeProjet}")

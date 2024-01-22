@@ -60,7 +60,7 @@ public class ExperienceProfessionnelleImple implements ExperienceProfessionnelle
             experienceProfessionnelleRepository.save(experienceProfessionnelle);
             return new MessageResponse("Ajouter avec succes", true);
         }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Utilisateur non trouvé", false));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Experience non trouvé", false));
         }
     }
 
