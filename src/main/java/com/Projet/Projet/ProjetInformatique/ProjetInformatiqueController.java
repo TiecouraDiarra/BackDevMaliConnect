@@ -20,11 +20,10 @@ public class ProjetInformatiqueController {
     private ProjetInformatiqueService projetInformatiqueService;
 
     //AJOUTER UN PROJET
-//    @PreAuthorize("hasRole('ADMIN')")
+   //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter")
     public Object Ajouter(@RequestParam("titre") String titre, @RequestParam("description") String description,
                           @RequestParam("typeProjet") TypeProjet typeProjet, @RequestParam("photo") MultipartFile photo) throws IOException {
-
         return projetInformatiqueService.Ajouter(titre, description,typeProjet,photo);
     }
 
