@@ -1,5 +1,8 @@
 package com.Projet.Projet.ExperienceProfessionnelle;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/Tiec
 import com.Projet.Projet.utilisateur.User.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
