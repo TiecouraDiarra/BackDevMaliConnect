@@ -1,5 +1,7 @@
 package com.Projet.Projet.RendezVous;
 
+import com.Projet.Projet.ProjetInformatique.TypeProjet.TypeProjet;
+import com.Projet.Projet.RendezVous.TypeRdv.TypeRdv;
 import com.Projet.Projet.utilisateur.User.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,4 +42,8 @@ public class RendezVous {
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_typerdv")
+    private TypeRdv typeRdv;
 }

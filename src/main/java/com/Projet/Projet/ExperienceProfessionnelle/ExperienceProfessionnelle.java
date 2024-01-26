@@ -1,5 +1,6 @@
 package com.Projet.Projet.ExperienceProfessionnelle;
 import com.Projet.Projet.utilisateur.User.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,11 +20,16 @@ public class ExperienceProfessionnelle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String titre;
-    private String    datedebut;
-    private String   datefin;
-    private String  lieux;
 
+    private String titre;
+
+    private String datedebut;
+
+    private String datefin;
+
+    private String lieux;
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
     private User user;
