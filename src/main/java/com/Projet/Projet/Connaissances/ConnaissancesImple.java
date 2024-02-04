@@ -47,7 +47,7 @@ public class ConnaissancesImple implements ConnaissancesService {
         // Obtenir l'utilisateur à partir de la base de données en fonction de l'username
         Optional<User> userOptional = userRepository.findByEmail(currentUsername);
         if (userOptional.isPresent()) {
-            connaissances.setUser(userOptional.get());
+//            connaissances.setUser(userOptional.get());
             connaissancesRepository.save(connaissances);
             return new MessageResponse("Ajouter avec succes", true);
         }else {
