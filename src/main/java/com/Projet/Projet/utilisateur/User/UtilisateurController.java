@@ -39,13 +39,13 @@ public class UtilisateurController {
         return serviceUtilisateur.listeUtilisateur();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update")
     public Object updateUserProfile(@RequestBody User updateRequest) {
         return serviceUtilisateur.updateUserProfile(updateRequest);
     }
 
-    //AFFICHER L'AGE USER CONNECTE
+    //AFFICHER INFO SUR USER CONNECTE
     @GetMapping("/afficherinfo")
     public Object AfficherA(){
         return serviceUtilisateur.AfficherInfoUserConnecter();

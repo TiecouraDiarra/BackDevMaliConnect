@@ -30,7 +30,7 @@ public class ExperienceProfessionnelleController {
     }
 
      //MODIFIER UNE EXPERIENCE
-     @PreAuthorize("hasRole('ADMIN')")
+     //@PreAuthorize("hasRole('ADMIN')") qui veut dire seule l'admin peut joue sur cette fonction
     @PutMapping("/modifier")
     public MessageResponse modifier(@RequestBody ExperienceProfessionnelle experienceProfessionnelle) {
         experienceProfessionnelleService.Modifier(experienceProfessionnelle);

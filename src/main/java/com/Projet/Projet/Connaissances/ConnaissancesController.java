@@ -28,7 +28,7 @@ public class ConnaissancesController {
     }
 
     //MODIFIER UNE EXPERIENCE
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')") qui veut dire seule l'admin peut joue sur cette fonction
     @PutMapping("/modifier")
     public MessageResponse modifier(@RequestBody Connaissances connaissances) {
         connaissancesService.Modifier(connaissances);
@@ -36,7 +36,7 @@ public class ConnaissancesController {
     }
 
     //SUPPRIMER UNE EXPERIENCE PROFESSIONELLE
-    //@PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')") qui veut dire seule l'admin peut joue sur cette fonction
     @DeleteMapping("/supprimer/{id_connaissances}")
     public MessageResponse Supprimer(@PathVariable("id_econnaissances") Long id_connaissances){
         return connaissancesService.Supprimer(id_connaissances);

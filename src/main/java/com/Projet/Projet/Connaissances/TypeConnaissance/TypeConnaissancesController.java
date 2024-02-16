@@ -22,14 +22,14 @@ public class TypeConnaissancesController {
     }
 
     //AFFICHER LES TYPES
-    // @PreAuthorize("hasRole('ADMIN')")
+     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficher")
     public List<TypeConnaissances> Afficher(){
         return typeConnaissancesService.Afficher();
     }
 
     //MODIFIER UN TYPE
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")qui veut dire seule l'admin peut joue sur cette fonction
     @PutMapping("/modifier")
     public MessageResponse Modifier(@RequestBody TypeConnaissances TypeConnaissances){
         typeConnaissancesService.Modifier(TypeConnaissances);
@@ -38,13 +38,13 @@ public class TypeConnaissancesController {
 
 
     //SUPPRIMER UN TYPE
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")qui veut dire seule l'admin peut joue sur cette fonction
     @DeleteMapping("/supprimer/{id_TypeConnaissances}")
     public MessageResponse Supprimer(@PathVariable("id_TypeConnaissances") Long id_TypeConnaissances){
         return typeConnaissancesService.Supprimer(id_TypeConnaissances);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")qui veut dire seule l'admin peut joue sur cette fonction
     @GetMapping("/afficherparId/{id}")
     public Object AfficherParId(@PathVariable("id") Long id){
         return typeConnaissancesService.AfficherParId(id);

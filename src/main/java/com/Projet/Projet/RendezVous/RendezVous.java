@@ -44,6 +44,10 @@ public class RendezVous {
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "id_userenvoie")
+    private User userEvoyer;
+
+    @ManyToOne
     @JoinColumn(name = "id_typerdv")
     private TypeRdv typeRdv;
 }

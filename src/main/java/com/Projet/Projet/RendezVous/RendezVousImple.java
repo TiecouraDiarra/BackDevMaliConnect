@@ -2,8 +2,11 @@ package com.Projet.Projet.RendezVous;
 
 import com.Projet.Projet.Message.MessageResponse;
 import com.Projet.Projet.ProjetInformatique.ProjetInformatiqueRepository;
+import com.Projet.Projet.RendezVous.TypeRdv.TypeRdv;
+import com.Projet.Projet.RendezVous.TypeRdv.TypeRdvRepository;
 import com.Projet.Projet.utilisateur.User.User;
 import com.Projet.Projet.utilisateur.User.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -20,6 +24,9 @@ public class RendezVousImple implements RendezVousService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TypeRdvRepository typeRdvRepository;
 
     @Autowired
     private RendezVousRepository rendezVousRepository;
@@ -48,7 +55,7 @@ public class RendezVousImple implements RendezVousService{
     }
 
     @Override
-    public Object Ajouter(RendezVous rendezVous) {
+    public Object Ajouter(RendezVous rendezVous,Long typeRendezVousId, User idUser) {
         // Obtenir l'utilisateur connecté à partir de l'objet Authentication
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
@@ -56,8 +63,13 @@ public class RendezVousImple implements RendezVousService{
         // Obtenir l'utilisateur à partir de la base de données en fonction de l'username
         Optional<User> userOptional = userRepository.findByEmail(currentUsername);
         if (userOptional.isPresent()) {
-            rendezVous.setUser(userOptional.get());
+            rendezVous.setUserEvoyer(userOptional.get());
+            rendezVous.setUser(idUser);
             rendezVous.setDateenvoie(new Date());
+            // Récupérer le type correspondant
+            TypeRdv typeRdv = typeRdvRepository.findById(typeRendezVousId)
+                    .orElseThrow(() -> new EntityNotFoundException("Type introuvable avec l'ID: " + typeRendezVousId));
+            rendezVous.setTypeRdv(typeRdv);
             rendezVousRepository.save(rendezVous);
             return new MessageResponse("Rendez-vous ajoute avec succes", true);
         }else {
@@ -68,5 +80,15 @@ public class RendezVousImple implements RendezVousService{
     @Override
     public RendezVous AfficherParId(Long id) {
         return rendezVousRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Map<String, Object>> AfficherRdvParRecuParUserConnecter() {
+        return null;
+    }
+
+    @Override
+    public List<Map<String, Object>> AfficherRdvParEnvoyerParUserConnecterNew() {
+        return null;
     }
 }

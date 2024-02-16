@@ -28,7 +28,7 @@ public class ProjetInformatiqueController {
     }
 
     //AFFICHER LES PROJETS
-//    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")qui veut dire seule l'admin peut joue sur cette fonction
     @GetMapping("/afficher")
     public List<ProjetInformatique> Afficher(){
         return projetInformatiqueService.Afficher();
@@ -36,7 +36,7 @@ public class ProjetInformatiqueController {
 
 
     //MODIFIER UN PROJET
-//    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")qui veut dire seule l'admin peut joue sur cette fonction
     @PutMapping("modifier/{id}")
     public ResponseEntity<MessageResponse> modifierProjet(
             @PathVariable Long id,
@@ -49,7 +49,7 @@ public class ProjetInformatiqueController {
     }
 
     //SUPPRIMER UN PROJET
-//    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")qui veut dire seule l'admin peut joue sur cette fonction
     @DeleteMapping("/supprimer/{id_projet}")
     public MessageResponse Supprimer(@PathVariable("id_projet") Long id_projet){
         return projetInformatiqueService.Supprimer(id_projet);
