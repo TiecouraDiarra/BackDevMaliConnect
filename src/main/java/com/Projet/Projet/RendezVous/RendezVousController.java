@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @RestController
@@ -47,10 +48,21 @@ public class RendezVousController {
         return rendezVousService.Supprimer(id_rdv);
     }
 
-   @PreAuthorize("hasRole('ADMIN')")
+//   @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficherparId/{id}")
     public RendezVous AfficherParId(@PathVariable("id") Long id){
         return rendezVousService.AfficherParId(id);
     }
 
+    //AFFICHER LA LISTE DES RDV RECU PAR USER CONNECTE
+    @GetMapping("/get/mine")
+    public List<Map<String, Object>> AfficherRdvParRecuParUserConnecter(){
+        return rendezVousService.AfficherRdvParRecuParUserConnecter();
+    }
+
+    //AFFICHER LA LISTE DES RDV ENVOYER PAR USER CONNECTE
+    @GetMapping("/get")
+    public List<Map<String, Object>> AfficherRdvParEnvoyerParUserConnecterNew(){
+        return rendezVousService.AfficherRdvParEnvoyerParUserConnecterNew();
+    }
 }

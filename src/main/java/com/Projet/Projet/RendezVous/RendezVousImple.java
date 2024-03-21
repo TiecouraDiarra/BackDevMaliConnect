@@ -14,10 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RendezVousImple implements RendezVousService{
@@ -84,11 +81,75 @@ public class RendezVousImple implements RendezVousService{
 
     @Override
     public List<Map<String, Object>> AfficherRdvParRecuParUserConnecter() {
-        return null;
+        // Obtenir l'utilisateur connecté à partir de l'objet Authentication
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+
+        Optional<User> userOptional = userRepository.findByEmail(currentUsername);
+        // Vérifier si l'utilisateur existe
+        if (userOptional.isPresent()) {
+            User utilisateurConnecte = userOptional.get();
+            List<RendezVous> rdvsUtilisateur = rendezVousRepository.findByUser(utilisateurConnecte);
+            // Initialiser une liste pour stocker les détails des rdv
+            List<Map<String, Object>> rdvDetailsList = new ArrayList<>();
+            // Parcourir chaque rdv dans la liste
+            for (RendezVous rdv : rdvsUtilisateur) {
+                // Créer une nouvelle map pour stocker les détails du rdv
+                Map<String, Object> rdvDetails = new HashMap<>();
+                // Ajouter les détails du rdv dans la map
+                rdvDetails.put("id", rdv.getId());
+                rdvDetails.put("date", rdv.getDateRendezvous());
+                rdvDetails.put("heure", rdv.getHeureRendezvous());
+                rdvDetails.put("objet", rdv.getObjet());
+                rdvDetails.put("typerdv", rdv.getTypeRdv());
+                rdvDetails.put("createdAt", rdv.getDateenvoie());
+                rdvDetails.put("userenvoyer", rdv.getUserEvoyer());
+                // Ajouter les détails du rdv à la liste
+                rdvDetailsList.add(rdvDetails);
+            }
+            // Retourner la liste des détails des rdv
+            return rdvDetailsList;
+        }else {
+            // Gérer le cas où l'utilisateur n'est pas trouvé
+            // Vous pouvez lancer une exception, retourner une liste vide ou prendre d'autres mesures selon vos besoins
+            throw new RuntimeException("Utilisateur non trouvé");
+        }
     }
 
     @Override
     public List<Map<String, Object>> AfficherRdvParEnvoyerParUserConnecterNew() {
-        return null;
+        // Obtenir l'utilisateur connecté à partir de l'objet Authentication
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+
+        Optional<User> userOptional = userRepository.findByEmail(currentUsername);
+        // Vérifier si l'utilisateur existe
+        if (userOptional.isPresent()) {
+            User utilisateurConnecte = userOptional.get();
+            List<RendezVous> rdvsUtilisateur = rendezVousRepository.findByUserEvoyer(utilisateurConnecte);
+            // Initialiser une liste pour stocker les détails des rdv
+            List<Map<String, Object>> rdvDetailsList = new ArrayList<>();
+            // Parcourir chaque rdv dans la liste
+            for (RendezVous rdv : rdvsUtilisateur) {
+                // Créer une nouvelle map pour stocker les détails du rdv
+                Map<String, Object> rdvDetails = new HashMap<>();
+                // Ajouter les détails du rdv dans la map
+                rdvDetails.put("id", rdv.getId());
+                rdvDetails.put("date", rdv.getDateRendezvous());
+                rdvDetails.put("heure", rdv.getHeureRendezvous());
+                rdvDetails.put("objet", rdv.getObjet());
+                rdvDetails.put("typerdv", rdv.getTypeRdv());
+                rdvDetails.put("createdAt", rdv.getDateenvoie());
+                rdvDetails.put("user", rdv.getUser());
+                // Ajouter les détails du rdv à la liste
+                rdvDetailsList.add(rdvDetails);
+            }
+            // Retourner la liste des détails des rdv
+            return rdvDetailsList;
+        }else {
+            // Gérer le cas où l'utilisateur n'est pas trouvé
+            // Vous pouvez lancer une exception, retourner une liste vide ou prendre d'autres mesures selon vos besoins
+            throw new RuntimeException("Utilisateur non trouvé");
+        }
     }
 }
